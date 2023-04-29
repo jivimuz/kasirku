@@ -1,0 +1,32 @@
+.img-goyang {
+  animation: slidein 3s infinite;
+}
+
+@keyframes slidein {
+  0% {
+    transform: translateX(0%);
+  }
+  25% {
+    transform: translateX(-40%);
+  }
+  75% {
+    transform: translateX(10%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.title-menu{
+  padding-top: 10px;
+  color: white;
+  padding-left: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.img-line {
+  border: 1px solid #000;
+  box-shadow: 2px 2px 4px #000;
+  display: flex;
+  align-items: center;
+}
