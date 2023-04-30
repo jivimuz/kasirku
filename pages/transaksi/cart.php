@@ -3,9 +3,9 @@ $stmt = $mysqli->prepare("SELECT * FROM tbl_transaksi WHERE id_pegawai = ? and i
 $stmt->bind_param("i", $dataku['id_pegawai']);
 $stmt->execute();
 $result = $stmt->get_result();
+$now = date("Y-m-d H:i:s");
 
-    if($result->num_rows == 0){
-        $now = date("Y-m-d H:i:s");
+        if($result->num_rows == 0){
         $mysqli->query("INSERT INTO tbl_transaksi set id_pegawai='$dataku[id_pegawai]', created_at='$now' ");
         echo sweetalert('', '', 'success', '0', 'false', '');
     }else{
@@ -103,7 +103,7 @@ $result = $stmt->get_result();
 
             $send = $mysqli->query("UPDATE tbl_transaksi set total_tunai='$data2', total_harga='$data1', total_kembali='$data3', is_paid='1' , paid_at ='$now'  where id_transaksi='$data[id_transaksi]'");
 
-            echo sweetalert('Sukses', 'Data Berhasil ditambahkan', 'success', '1000', 'false', '?page=transaksi');
+            echo sweetalert('Sukses', 'Data Berhasil ditambahkan', 'success', '3000', 'false', '?page=transaksi');
         }
 
 

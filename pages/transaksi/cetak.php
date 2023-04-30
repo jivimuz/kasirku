@@ -29,7 +29,7 @@
    <div class="table-responsive">
    	<h5 class="text-center">Laporan  
         <?php if(!empty($dari_tgl)){echo 'dari  '. date('d-m-Y', strtotime($dari_tgl));}?> sampai <?=date('d-m-Y', strtotime($sampai_tgl))?> :</h5>
-   	<table class="table table-hover table-bordered" width="100%" style="font-size:12px">
+   	<table class="table " width="100%"  style="font-size:12px">
    		<tr>
    			<th>No.</th>
    			<th>Nama Kasir</th>
