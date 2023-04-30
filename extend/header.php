@@ -12,7 +12,7 @@
 	}
 
 	// akses tombol print
-	if($page == 'show_transaksi' || $page == 'show_product'){
+	if($page == 'show_transaksi' || $page == 'show_product'|| $page == 'cetak'){
         $printini = '';
     }else{
         $printini = 'hidden';
