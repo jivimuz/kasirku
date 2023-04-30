@@ -1,8 +1,10 @@
 
 <?php 
 	if(isset($_POST['cek'])){
-		$dari_tgl = sanitize($_POST['date-from']);
-		$sampai_tgl = sanitize($_POST['date-to']);
+		if(!empty($_POST['date-from'])){
+			$dari_tgl = sanitize($_POST['date-from'])." 00:00:01";
+		}else{ $dari_tgl = '';}
+		$sampai_tgl = sanitize($_POST['date-to'])." 23:59:59";
 		$id_pegawai = sanitize($_POST['id_pegawai']);
 
 	}

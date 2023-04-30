@@ -39,6 +39,7 @@ body {
 
     
 	<section class="login-content">
+			<p class="text-aja"> KASIRKU <i class="fa fa-cart-arrow-down"></i></p>
 		<div class="logo"></div>
 		<div class="col-md-6 col-sm-6 col-xs-8">
 			<?php 
