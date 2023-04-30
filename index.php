@@ -17,18 +17,29 @@ include 'extend/header.php';
 if ($page=="" || $page=="dashboard") {
     include 'pages/dashboard.php';}
 
-elseif ($page=="pegawai") {
+elseif ($page=="pegawai" && $dataku['is_admin'] == 1) {
      include 'pages/pegawai/pegawai.php';}
 
 elseif ($page=="product") {
         include 'pages/produk/product.php';}
 
 elseif ($page=="jenis_product") {
-            include 'pages/produk/jenis_product.php';}
+        include 'pages/produk/jenis_product.php';}
 
 elseif ($page=="show_product") {
-                include 'pages/produk/show_product.php';}
+        include 'pages/produk/show_product.php';}
 
+elseif ($page=="transaksi") {
+        include 'pages/transaksi/transaksi.php';}
+
+elseif ($page=="show_transaksi") {
+        include 'pages/transaksi/show_transaksi.php';}
+
+elseif ($page=="cart") {
+            include 'pages/transaksi/cart.php';}
+        
+elseif ($page=="cetak") {
+                include 'pages/transaksi/cetak.php';}
 else{
     include 'pages/dashboard.php';}
 

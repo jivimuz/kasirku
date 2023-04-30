@@ -128,7 +128,7 @@ if (isset($_POST['do_edit'])) {
 				<div class="user-info">
 
 		<div class="table-responsive">
-        <table class="table table-hover table-bordered" id="tabelKu" width="100%">
+        <table class="table table-hover" id="tabelKu" width="100%">
             <thead>
                 <tr><th class="text-center">No.</th>
                     <th class="text-center">Nama</th>

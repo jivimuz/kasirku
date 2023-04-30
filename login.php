@@ -149,7 +149,7 @@ body {
 									<i style="font-size:22px;color: orange;" id="hide" onclick="hide()" class="fa fa-eye pont" hidden=""></i></span>
 							</div>
 						</div>
-                    <p class="semibold-text mb-2"><a style="text-decoration: none;" href="#" data-toggle="flip">Belum Punya Akun ?</a></p>
+                    <!-- <p class="semibold-text mb-2"><a style="text-decoration: none;" href="#" data-toggle="flip">Belum Punya Akun ?</a></p> -->
 
 				</div>
 				

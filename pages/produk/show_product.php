@@ -8,10 +8,30 @@ if(!isset($_GET["id"])){
      $data = mysqli_fetch_assoc($dataa);
 
 ?>
+
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<title>Detail Produk</title>
+</head>
+<body>
+<div class="app-title">
+    <div class="row">
+		<a href="?page=product" class="btn btn-default"><i class="fa fa-chevron-left"></i></a><h1><i class="fa fa-cube"></i> Detail Produk</h1>
+	</div>
+	<ul class="app-breadcrumb breadcrumb">
+		<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+		<li class="breadcrumb-item"><a href="?page=product">Produk</a></li>
+		<li class="breadcrumb-item"><a href="javascript:void(0)">detail</a></li>
+	</ul>
+</div>
 <div class="tile row">
+    
     <div class="col-md-12 col-xs-8 col-sm-8">
-				<h3 class="login-head text-center"> Data Product : <?=$data['nama_product']?> </h3><br>
-                <hr>
+            <h3 class="login-head text-center"> Data Product : <?=$data['nama_product']?> </h3><br>
+            <hr>
     </div>
     <div class="col-md-7 col-xs-8 col-sm-8">
 				<div class="form-group">

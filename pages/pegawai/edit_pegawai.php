@@ -15,7 +15,7 @@ if(isset($_POST["idnya"])){
 					<label class="control-label">Silahkan Isi data dibawah:</label>
 					<input class="form-control" name="id_pegawai" value="<?= $data['id_pegawai']?>" hidden>
 					<input class="form-control" name="pass_before" value="<?= $data['password']?>" hidden>
-					<input class="form-control" name="username" value="<?= $data['username']?>" type="text" maxlength="30" placeholder="Username" onkeyup="this.value = this.value.toUpperCase()" autofocus required>
+					<input class="form-control" name="username" readonly value="<?= $data['username']?>" type="text" maxlength="30" placeholder="Username" onkeyup="this.value = this.value.toUpperCase()" autofocus required>
                 </div>
                 <div class="form-group">
                     <input class="form-control" name="password"  type="password" maxlength="50" placeholder="Password (min 6) /  Kosongkan jika tidak diedit" autofocus>
@@ -29,8 +29,12 @@ if(isset($_POST["idnya"])){
                <div class="form-group">
                     <input class="form-control" name="no_hp" value="<?= $data['no_hp']?>" type="number" maxlength="99999999999999" placeholder="No. HP" autofocus>
                </div>
-               <div class="form-group form-control">
-                    <input type="checkbox" value="1" name="is_admin" <?php if($data['is_admin'] == 1){echo 'checked';}?>> Is Admin?
+               <div class="form-group form-control"<?php if($data['id_pegawai'] == 1){echo 'hidden';} ?>>
+                    <input type="checkbox" value="1" name="is_admin" 
+                    <?php if($data['is_admin'] == 1){echo 'checked';} ?>
+
+                    
+                    > Is Admin?
                </div>
                <div class="form-group btn-container">
                     <button class="btn btn-primary btn-block" type="submit" name="do_edit"><i class="fa fa-check fa-lg fa-fw"></i>Update</button>

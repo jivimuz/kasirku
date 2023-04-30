@@ -4,6 +4,11 @@
 <h6 class="text-right p-2"> Jivi MG <i class="fa fa-copyright"></i> <?= date('Y')?> &nbsp;&nbsp;&nbsp;</h6>
 
 <script>
+function printIni(){
+		window.print();
+}
+
+
 $(document).ready(function(){
   $('.app-sidebar__toggle').on('click', function(){
     $('.app').toggleClass('sidenav-toggled');
