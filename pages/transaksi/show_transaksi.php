@@ -8,6 +8,9 @@ $result = $stmt->get_result();
         echo sweetalert('', '', 'success', '0', 'false', '?page=transaksi');
     }else{
     $data = $result->fetch_array(MYSQLI_ASSOC);
+
+    $data2 = $mysqli->query("SELECT nama_pegawai FROM tbl_pegawai WHERE id_pegawai = '$data[id_pegawai]' ");		
+	$as = mysqli_fetch_assoc($data2);
     ?>
 
 
@@ -29,7 +32,7 @@ $result = $stmt->get_result();
 	</ul>
 </div>
 <div class="tile">
-    
+<img src="images/assets/kop.png" class="table-responsive p-3" with="100%"><br><br>
     <div class="col-md-12">
         
     </div>
@@ -91,11 +94,13 @@ $result = $stmt->get_result();
     </table>
     
     </div>
-    <div class="row">
-           
-          
-            
+        <div class="row">
+          <p class="col-md-8" ><p>
+            <h6 class="col-md-4 text-center" style="padding-bottom:70px;padding-top:20px;">
+                Kasir : <?= $as['nama_pegawai']?>
+            </h6>
         </div>
+        <p class="text-center">Terimakasih telah belanja di toko kami</p> 
     </div>
 </div>
 <?php }

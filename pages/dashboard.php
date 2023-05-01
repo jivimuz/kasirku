@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="app-title">
-	<div class="row"><h1><i class="fa fa-cart-plus"></i> Dashboard</h1>
+	<div class="row"><h1><i class="fa fa-Dashboard"></i> Dashboard</h1>
 	</div>
 	<ul class="app-breadcrumb breadcrumb">
 		<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -50,18 +50,22 @@ foreach ($data as $d) {
 </div>
 <div class="col-md-5 row">
         
+            <div class="col-md-6">
 
-			<h4 class="text-danger col-md-12" >Menu Kasir</h3>
-            <div class='col-md-4 p-2'>
+			<h4 class="text-danger " >Menu Kasir</h3>
+            <div class='col-md-12 p-2'>
 			<a class="btn btn-warning" href="?page=product"><i class=" fa fa-cube"></i>Produk</a>
             </div>
-            <div class='col-md-6 p-2 text-left'>
+            <div class='col-md-12 p-2 text-left'>
 			<a class="btn btn-warning" href="?page=transaksi"><i class="fa fa-cart-arrow-down"></i>Transaksi</a>
             </div>
+            </div>
             <?php if($dataku['is_admin'] == 1):?>
+            <div class="col-md-6">
 			<h4 class=" text-danger col-md-12">Menu Admin</h3>
             <div class='col-md-12 p-2'>
 			<a class="btn btn-warning" href="?page=pegawai"><i class=" fa fa-users"></i>Pegawai</a>
+            </div>
             </div>
 			<?php endif;?>
 </div>

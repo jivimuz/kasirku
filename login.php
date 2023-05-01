@@ -23,7 +23,7 @@ body {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="icon" href="">
-
+	<title>Kasirku</title>
 	<!-- og:property -->
 	
 <meta name="mobile-web-app-capable" content="yes">
@@ -74,7 +74,7 @@ body {
 					$_SESSION['username'] = $data['username'];
 					$_SESSION['id_pegawai'] = $data['id_pegawai'];
 
-                    header("location: index.php");		
+                    header("location: .");		
 								
 				}
 			}

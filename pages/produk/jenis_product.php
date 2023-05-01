@@ -128,24 +128,33 @@ $errors = array();
 								<?php 
 								$sql = $mysqli->query("SELECT * FROM tbl_jenis_product ORDER BY nama_jenis_product ASC");
 								while($data = mysqli_fetch_assoc($sql)):
+									 $cekUp = $mysqli->query("select id_jenis_product from tbl_product where id_jenis_product = '$data[id_jenis_product]'");
+									 $r =mysqli_num_rows($cekUp);
 									?>
 									<tr>
-										<td class="text-center"><?= $data['nama_jenis_product']; ?></td>
+										<td class="text-center"><?= $data['nama_jenis_product']; ?> <span class="badge badge-warning">
+										<?= $r?>
+										</span></td>
 										<td class="text-center">				
 											<a href="?page=jenis_product&edit=<?= $data['id_jenis_product']; ?>" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
-
+									<?php
+									if($r==0){?>
 											<a href="?page=jenis_product&del=<?= $data['id_jenis_product']; ?>" class="btn btn-sm btn-danger tombol-hapus"><i class="fa fa-trash"></i></a>
 										</td>
 									</tr>
-								<?php endwhile; ?>
+								<?php } endwhile; ?>
 							</tbody>
-						</table>
-					</div>
+						</table><br>
+					</div><div class="alert alert-warning">
+			<strong>*Notes :</strong><br>
+			Hanya dapat menghapus jenis product yang kosong 
 				</div>
 			</div>
 		</div>
+		
+		</div>
 	</div>
-
+	
 	<?php 
 	if (@$_GET['del']) {
 		$del_id = $_GET['del'];

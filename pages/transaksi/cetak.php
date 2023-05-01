@@ -29,6 +29,7 @@
 		
    <!---------------------------------------- Ini yang di edit dari bawah -------------------------------------------->
    <div class="table-responsive">
+	<img src="images/assets/kop.png" class="table-responsive " with="100%"><br><br>
    	<h5 class="text-center">Laporan  
         <?php if(!empty($dari_tgl)){echo 'dari  '. date('d-m-Y', strtotime($dari_tgl));}?> sampai <?=date('d-m-Y', strtotime($sampai_tgl))?> :</h5>
    	<table class="table " width="100%"  style="font-size:12px">

@@ -8,7 +8,7 @@ if(isset($_POST["idnya"])){
 <div class="row">
     <div class="col-md-12 col-xs-8 col-sm-8">
         <form  action="?page=product"  method="POST" enctype="multipart/form-data">
-				<h3 class="login-head text-center"><i class="fa fa-plus"></i> Add Product</h3><br>
+				<h3 class="login-head text-center"><i class="fa fa-plus"></i> Edit Product</h3><br>
 				<div class="form-group">
 					<label class="control-label">Silahkan Isi data dibawah:</label>
 					<input class="form-control" name="nama_product" value="<?=$data['nama_product']?>" type="text" maxlength="30" placeholder="Nama Produk" autofocus required>

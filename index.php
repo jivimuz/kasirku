@@ -40,6 +40,7 @@ elseif ($page=="cart") {
         
 elseif ($page=="cetak") {
                 include 'pages/transaksi/cetak.php';}
+                
 else{
     include 'pages/dashboard.php';}
 

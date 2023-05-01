@@ -37,11 +37,16 @@ $now = date("Y-m-d H:i:s");
             $id_transaksi = sanitize($_POST['id_transaksi']);
             $product = sanitize($_POST['product']);
             $cekProduk = $mysqli->query("SELECT id_product FROM tbl_product where nama_product = '$product'");
-            if(mysqli_num_rows($cekProduk) == 0){
-                $errors[] = "masukan nama produk yang sesuai";
+            $cekProduk2 = $mysqli->query("SELECT id_product FROM tbl_cart where id_transaksi = '$data[id_transaksi]'");
+            if(mysqli_num_rows($cekProduk2) > 0){
+                $errors[] = "Produk sudah ada pada list";
             }
-            if(!empty($errors)){
-                display_errors($errors);
+
+            if(mysqli_num_rows($cekProduk) == 0){
+                $errors[] = "Masukan nama produk yang sesuai";
+            }
+            if (!empty($errors)) {
+                 echo display_errors($errors);
             }else{
             $g = mysqli_fetch_array($cekProduk);
             $send = $mysqli->query("INSERT INTO tbl_cart set id_product='$g[id_product]', id_transaksi='$id_transaksi'");
@@ -58,19 +63,32 @@ $now = date("Y-m-d H:i:s");
             if(empty($qty)){
                 $errors[] = "QTY tidak boleh Kosong";
             }
-             
+            $cel = $mysqli->query("SELECT stok FROM tbl_product where id_product='$id_product'");
+            $ce = mysqli_fetch_assoc($cel);
+            if($qty < 0 || $qty > $ce['stok']){
+                $errors[] = "Masukan jumlah yang sesuai, stok tersisa adalah .$ce[stok]";
+            }
+
             if(!empty($errors)){
-                display_errors($errors);
+                echo display_errors($errors);
             }else{
+                
+
                 if($qty > $qty_before){
                    $jumlah = $qty - $qty_before; 
                     $down = $mysqli->query("UPDATE tbl_product set stok = stok - '$jumlah' where id_product='$id_product'");
-                }else{
+                    $send = $mysqli->query("UPDATE tbl_cart set qty='$qty' where id_cart='$id_cart'");
+                    echo sweetalert('', '', 'success', '0', 'false', '');
+                }elseif($qty < $qty_before){
                     $jumlah = $qty_before - $qty; 
                     $down = $mysqli->query("UPDATE tbl_product set stok = stok + '$jumlah' where id_product='$id_product'");
+                    $send = $mysqli->query("UPDATE tbl_cart set qty='$qty' where id_cart='$id_cart'");
+                    echo sweetalert('', '', 'success', '0', 'false', '');
+                }else if($qty != $qty_before){
+                    echo sweetalert('', '', 'success', '0', 'false', '');
                 }
-            $send = $mysqli->query("UPDATE tbl_cart set qty='$qty' where id_cart='$id_cart'");
-            echo sweetalert('', '', 'success', '0', 'false', '');
+                echo sweetalert('', '', 'success', '0', 'false', '');
+           
             }
 
         }
@@ -120,9 +138,9 @@ $now = date("Y-m-d H:i:s");
         <div class="row">
             <div class="col-md-10">
                 <input type="text" name="id_transaksi" value="<?=$data['id_transaksi']?>" hidden>
-                <input type="text" name="product" list="auto-product" placeholder="Masukan nama barang untuk menambah barang" class="form-control">
+                <input type="text" name="product" onkeyup="cekNamaProduct()" id="product" list="auto-product" placeholder="Masukan nama barang untuk menambah barang" class="form-control">
             </div>
-                <button type="submit" class="btn btn-lg btn-primary col-md-2" name="add-product"><i class="fa fa-cart-plus"></i></button>
+                <button type="submit" class="btn btn-lg btn-primary col-md-2" disabled name="add-product" id="add-product"><i class="fa fa-cart-plus"></i></button>
         </div>
 		</form>
     </div>
@@ -160,7 +178,7 @@ $now = date("Y-m-d H:i:s");
                             <input type="text" name="id_product" value="<?=$i['id_product']?>" hidden>
                             <input type="text" name="id_cart" value="<?=$i['id_cart']?>" hidden>
                             <input type="text" name="qty_before" value="<?=$i['qty']?>" hidden>
-                            <input type="number" max="999" style="width:70px" required name="qty" class="" value="<?=$i['qty']?>">
+                            <input type="number" min="1" onchange="this.value = Math.max(Math.ceil(Math.abs(this.value || 1)) || 1);" max="999" style="width:70px" required name="qty" class="" value="<?=$i['qty']?>">
                             <button type="submit" name="upCart" ><i class="fa fa-save"></i></button>
                         </form>
                     </td>
@@ -218,6 +236,30 @@ $now = date("Y-m-d H:i:s");
         </div>
     </div>
 </div>
+
+<script>
+function cekNamaProduct() {
+    var product = document.getElementById("product").value;
+    var options = document.getElementById("auto-product").options;
+    var addButton = document.getElementById("add-product");
+    var found = false;
+
+    // Loop through options to check if value exists
+    for (var i = 0; i < options.length; i++) {
+        if (product == options[i].value) {
+            found = true;
+            break;
+        }
+    }
+
+    // Enable/disable button based on value existence
+    if (found) {
+        addButton.disabled = false;
+    } else {
+        addButton.disabled = true;
+    }
+}
+</script>
 <script>
   function kembalian() {
   var uang = parseFloat(document.getElementById('uang').value);
