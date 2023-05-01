@@ -37,24 +37,28 @@ $now = date("Y-m-d H:i:s");
             $id_transaksi = sanitize($_POST['id_transaksi']);
             $product = sanitize($_POST['product']);
             $cekProduk = $mysqli->query("SELECT id_product FROM tbl_product where nama_product = '$product'");
-            $cekProduk2 = $mysqli->query("SELECT id_product FROM tbl_cart where id_transaksi = '$data[id_transaksi]'");
-            if(mysqli_num_rows($cekProduk2) > 0){
-                $errors[] = "Produk sudah ada pada list";
-            }
-
-            if(mysqli_num_rows($cekProduk) == 0){
+            if(mysqli_num_rows($cekProduk) > 0){
+                $tcek = mysqli_fetch_assoc($cekProduk);
+                $cekProduk2 = $mysqli->query("SELECT id_product FROM tbl_cart where id_transaksi = '$data[id_transaksi]' and id_product ='$tcek[id_product]'");
+                if(mysqli_num_rows($cekProduk2) > 0){
+                    $errors[] = "Produk sudah ada pada list";
+                } 
+            }else{
                 $errors[] = "Masukan nama produk yang sesuai";
             }
+            
+            
+
+            
             if (!empty($errors)) {
                  echo display_errors($errors);
             }else{
-            $g = mysqli_fetch_array($cekProduk);
-            $send = $mysqli->query("INSERT INTO tbl_cart set id_product='$g[id_product]', id_transaksi='$id_transaksi'");
-            $down = $mysqli->query("UPDATE tbl_product SET stok = stok - 1 WHERE id_product = '$g[id_product]'");
+            $send = $mysqli->query("INSERT INTO tbl_cart set id_product='$tcek[id_product]', id_transaksi='$id_transaksi'");
+            $down = $mysqli->query("UPDATE tbl_product SET stok = stok - 1 WHERE id_product = '$tcek[id_product]'");
             echo sweetalert('', '', 'success', '0', 'false', '');
         }
         }
-        if (isset($_POST['upCart'])) {
+        if (isset($_POST['qty'])) {
             $id_product =sanitize($_POST['id_product']);
             $id_cart =sanitize($_POST['id_cart']);
             $qty_before =sanitize($_POST['qty_before']);
@@ -65,8 +69,8 @@ $now = date("Y-m-d H:i:s");
             }
             $cel = $mysqli->query("SELECT stok FROM tbl_product where id_product='$id_product'");
             $ce = mysqli_fetch_assoc($cel);
-            if($qty < 0 || $qty > $ce['stok']){
-                $errors[] = "Masukan jumlah yang sesuai, stok tersisa adalah .$ce[stok]";
+            if($qty < 0 || $qty > ($ce['stok'] + $qty_before)){
+                $errors[] = "Masukan jumlah yang sesuai, stok tersisa adalah .$ce[stok]+$qty_before";
             }
 
             if(!empty($errors)){
@@ -178,8 +182,8 @@ $now = date("Y-m-d H:i:s");
                             <input type="text" name="id_product" value="<?=$i['id_product']?>" hidden>
                             <input type="text" name="id_cart" value="<?=$i['id_cart']?>" hidden>
                             <input type="text" name="qty_before" value="<?=$i['qty']?>" hidden>
-                            <input type="number" min="1" onchange="this.value = Math.max(Math.ceil(Math.abs(this.value || 1)) || 1);" max="999" style="width:70px" required name="qty" class="" value="<?=$i['qty']?>">
-                            <button type="submit" name="upCart" ><i class="fa fa-save"></i></button>
+                            <input type="number" min="1" onchange="this.value = Math.max(Math.ceil(Math.abs(this.value || 1)) || 1); submit();" max="<?=$i['stok'] + $i['qty']?>" style="width:50px" required name="qty" class="" value="<?=$i['qty']?>">
+                            <!-- <button type="submit" name="upCart" ><i class="fa fa-save"></i></button> -->
                         </form>
                     </td>
                     <td><?php 
